@@ -66,10 +66,6 @@ float fuel_ratio(vector<float> M, vector<float> K, vector<float> C) {
 	return (2 * A * 16 + 2 * 3.76 * A * 14) / M[0];
 }
 
-float anal_volume() {
-	return 1004030400320;
-}
-
 int main()
 {
 	setlocale(LC_ALL, "en");
