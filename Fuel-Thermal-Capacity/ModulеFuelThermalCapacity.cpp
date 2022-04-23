@@ -79,7 +79,7 @@ int main()
 	Sheet ExelTable;
 	vector<float> Q, C, M, m, P, K, n, L, fuel_type;
 
-	ExelTable.setPath("C:/Users/Vr61v/Desktop/test.csv");
+	ExelTable.setPath("test.csv");
 	vector<vector<float>>* measurements = ExelTable.readAsFloat();
 
 	for (const auto& basicString : *measurements)
@@ -110,10 +110,8 @@ int main()
 					fuel_type.push_back(element);
 			}
 		}
-
-		
 	}
-
+	if(fuel_type[0] == 1.0f)
 	cout << "Объемная теплотворность жидкого топлива = " << liquid_fuel_volume(Q, C) << endl;
 	cout << "Массовая теплотворность жидкого топлива = " << liquid_fuel_weight(Q, P) << endl;
 
