@@ -68,7 +68,7 @@ float fuel_ratio(vector<float> M, vector<float> K, vector<float> C) {
 
 int main()
 {
-	setlocale(LC_ALL, "en");
+	setlocale(LC_ALL, "rus");
 
 	int k = 0;
 	float Q_volume = 0, Q_weight = 0, ratio = 0, M_all = 0;
