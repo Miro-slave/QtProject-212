@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+Fuel-Thermal-Capacity/x64/*
+Fuel-Thermal-Capacity/.vs/*
