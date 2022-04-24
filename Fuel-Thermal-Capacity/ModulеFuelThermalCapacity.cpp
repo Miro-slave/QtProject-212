@@ -88,22 +88,31 @@ int main()
 			{
 				case 1:
 					Q.push_back(element);
+					break;
 				case 2:
 					C.push_back(element);
+					break;
 				case 3:
-					M.push_back(element);
+					M.push_back(element); 
+					break;
 				case 4:
 					m.push_back(element);
+					break;
 				case 5:
 					P.push_back(element);
+					break;
 				case 6:
 					K.push_back(element);
+					break;
 				case 7:
 					n.push_back(element);
+					break;
 				case 8:
 					L.push_back(element);
+					break;
 				case 9:
 					fuel_type.push_back(element);
+					break;
 			}
 		}
 	}
