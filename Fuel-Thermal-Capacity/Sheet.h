@@ -14,8 +14,8 @@ public:
     void setPath(const std::string& path);
 
     void write(const std::vector<std::vector<std::string>>& data) const;
-	std::vector<std::vector<std::string>>* read() const;
-    std::vector<std::vector<float>>* readAsFloat() const;
+	std::vector<std::vector<std::string>> read() const;
+    std::vector<std::vector<float>> readAsFloat() const;
 
 private:
     // associated sheet
