@@ -27,9 +27,9 @@ void Sheet::write(const std::vector<std::vector<std::string>>& data) const
     file.close();
 }
 
-std::vector<std::vector<std::string>>* Sheet::read() const
+std::vector<std::vector<std::string>> Sheet::read() const
 {
-    auto* data = new std::vector<std::vector<std::string>>;
+    auto data = new std::vector<std::vector<std::string>>;
 
     // File pointer
     std::fstream file;
@@ -58,7 +58,7 @@ std::vector<std::vector<std::string>>* Sheet::read() const
 
     file.close();
 
-    return data;
+    return *data;
 }
 
 
@@ -68,9 +68,9 @@ std::vector<std::vector<std::string>>* Sheet::read() const
  * all "" (empty strings) converts to 0, be careful
  * all not empty strings will crash with exception BE CAREFUL TWICE !!!
  */
-std::vector<std::vector<float>>* Sheet::readAsFloat() const
+std::vector<std::vector<float>> Sheet::readAsFloat() const
 {
-    auto* data = new std::vector<std::vector<float>>;
+    auto data = new std::vector<std::vector<float>>;
 
     // File pointer
     std::fstream file;
@@ -106,6 +106,6 @@ std::vector<std::vector<float>>* Sheet::readAsFloat() const
 
     file.close();
 
-    return data;
+    return *data;
 }
 
