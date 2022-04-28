@@ -1,8 +1,7 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include "Sheet.h"
 using namespace std;
-
 
 //Т.к. перевод из СС не требудется, то функция считает как для газообразного, так и для жидкого
 float fuel_volume(vector<float> Q, vector<float> C) {
@@ -27,16 +26,19 @@ float fuel_weight(vector<float> Q, vector<float> C, vector<float> M, vector<floa
 
 	for (int i = 0; i < Q.size(); i++) {
 		//Если топливо газообразное
+
 		if (fuel_type[i] == 0.0f) {
 			mi = M[i] * n[i];
 			Qi = Q[i] / mi;
 			Ci = C[i] * (M[i] / M_all);
+
 			fuel_weight_all += Qi * Ci;
 		}
 		//Если топливо жидкое
 		if (fuel_type[i] == 1.0f) {
 			Qi = Q[i] / P[i];//Перевод из дж/м^3 в Дж/кг
 			fuel_weight_all += + Qi * C[i];
+
 		}
 	}
 	return fuel_weight_all;
@@ -51,7 +53,6 @@ float fuel_ratio(vector<float> M, vector<float> K, vector<float> C) {
 	return (2 * A * 16 + 2 * 3.76 * A * 14) / M[0];
 }
 
-
 int main()
 {
 	setlocale(LC_ALL, "rus");
@@ -59,7 +60,9 @@ int main()
 	Sheet ExelTable;
 	vector<float> Q, C, M, m, P, K, n, L, fuel_type;
 
+
 	ExelTable.setPath("test.csv");
+
 	vector<vector<float>> measurements = ExelTable.readAsFloat();
 
 	for (int i = 0; i < measurements.size(); i++)
@@ -77,6 +80,7 @@ int main()
 
 	cout << "Объемная теплотворность топлива = " << fuel_volume(Q, C) << endl;
 	cout << "Массовая теплотворность топлива = " << fuel_weight(Q, C, M, n, P, fuel_type) << endl;
+
 	cout << "Стереохимическое отношение = " << fuel_ratio(M, K, C) << endl;
 
 	return 0;
