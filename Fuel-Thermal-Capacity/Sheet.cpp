@@ -16,9 +16,9 @@ void Sheet::write(const std::vector<std::vector<std::string>>& data) const
     file.open(_path, std::ios::out);
 #ifdef DEBUG
     if (file.is_open())
-        std::cerr << "excel файл успешно открыт\n";
+        std::cerr << "excel file opened successfully\n";
     else
-        throw FileOpenException("запись в базу данных");
+        throw FileOpenException("database input");
 #endif
     for (auto element : data)
     {
@@ -30,11 +30,11 @@ void Sheet::write(const std::vector<std::vector<std::string>>& data) const
         file << s << "\n";
 #ifdef DEBUG
         if (file.fail())
-            throw OutputStreamException("запись в базу данных");
+            throw OutputStreamException("database input");
 #endif
     }
 #ifdef DEBUG
-    std::cerr << "успешно произведена запись в базу данных\n";
+    std::cerr << "database input completed successfully\n";
 #endif
     file.close();
 }
@@ -48,9 +48,9 @@ std::vector<std::vector<std::string>> Sheet::read() const
     file.open(_path, std::ios::in);
 #ifdef DEBUG
     if (file.is_open())
-        std::cerr << "excel файл успешно открыт\n";
+        std::cerr << "excel file opened successfully\n";
     else
-        throw FileOpenException("запись из базы данных");
+        throw FileOpenException("output from the database");
 #endif
     std::vector<std::string> row;
     std::string word, line;
@@ -60,7 +60,7 @@ std::vector<std::vector<std::string>> Sheet::read() const
         row.clear();
 #ifdef DEBUG
         if (file.fail())
-            throw InputStreamException("запись из базы данных(из файла)");
+            throw InputStreamException("output from the database(caused of file)");
 #endif
         // used for breaking words
         std::stringstream s(line);
@@ -71,7 +71,7 @@ std::vector<std::vector<std::string>> Sheet::read() const
         {
 #ifdef DEBUG
             if (s.fail())
-                throw InputStreamException("запись из базы данных(из строки)");
+                throw InputStreamException("output from the database(caused of string)");
 #endif
             row.push_back(word);
         }
@@ -79,7 +79,7 @@ std::vector<std::vector<std::string>> Sheet::read() const
     	data->push_back(row);
     }
 #ifdef DEBUG
-    std::cerr << "успешно произведена запись из базы данных\n";
+    std::cerr << "output from the database completed successfully\n";
 #endif
 
     file.close();
@@ -103,9 +103,9 @@ std::vector<std::vector<float>> Sheet::readAsFloat() const
     file.open(_path, std::ios::in);
 #ifdef DEBUG
     if (file.is_open())
-        std::cerr << "excel файл успешно открыт\n";
+        std::cerr << "excel file opened successfully\n";
     else
-        throw FileOpenException("запись из базы данных");
+        throw FileOpenException("float_output from the database");
 #endif
     std::vector<float> row;
     std::string word, line;
@@ -115,7 +115,7 @@ std::vector<std::vector<float>> Sheet::readAsFloat() const
         row.clear();
 #ifdef DEBUG
         if (file.fail())
-            throw InputStreamException("запись из базы данных(из строки)");
+            throw InputStreamException("float_output from the database(caused of file)");
 #endif
         // used for breaking words
         std::stringstream s(line);
@@ -126,7 +126,7 @@ std::vector<std::vector<float>> Sheet::readAsFloat() const
         {
 #ifdef DEBUG
             if (s.fail())
-                throw InputStreamException("запись из базы данных(из строки)");
+                throw InputStreamException("float_output from the database(caused of string)");
 #endif
             if(word.empty())
             {
@@ -141,7 +141,7 @@ std::vector<std::vector<float>> Sheet::readAsFloat() const
     	data->push_back(row);
     }
 #ifdef DEBUG
-    std::cerr << "успешно произведена запись из базы данных\n";
+    std::cerr << "float_output from the database completed successfully\n";
 #endif
 
     file.close();

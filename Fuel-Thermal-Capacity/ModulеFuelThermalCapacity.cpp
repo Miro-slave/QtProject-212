@@ -25,7 +25,7 @@ float fuel_volume(vector<float> Q, vector<float> C) {
 		fuel_volume_all = fuel_volume_all + Q[i] * C[i];
 	}
 #ifdef DEBUG
-	cerr << "модуль " << "fuel_volume" << " выполнен успешно\n";
+	cerr << "mudule " << "fuel_volume" << " completed successfully\n";
 #endif
 	return fuel_volume_all;
 }
@@ -46,7 +46,7 @@ float liquid_fuel_weight(vector<float> Q, vector<float> C, vector<float> P, vect
 		}
 	}
 #ifdef DEBUG
-	cerr << "модуль " << "liquid_fuel_weight" << " выполнен успешно\n";
+	cerr << "mudule " << "liquid_fuel_weight" << " completed successfully\n";
 #endif
 	return fuel_weight_all;
 }
@@ -80,7 +80,7 @@ float gas_fuel_weight(vector<float> Q, vector<float> C, vector<float> M, vector<
 		}
 	}
 #ifdef DEBUG
-	cerr << "модуль " << "gas_fuel_weight" << " выполнен успешно\n";
+	cerr << "mudule " << "gas_fuel_weight" << " completed successfully\n";
 #endif
 	return fuel_weight_all;
 }
@@ -100,7 +100,7 @@ float fuel_ratio(vector<float> M, vector<float> K, vector<float> C) {
 		throw DivideByZeroException("fuel_ratio");
 #endif
 #ifdef DEBUG
-	cerr << "модуль " << "fuel_ratio" << " выполнен успешно\n";
+	cerr << "mudule " << "fuel_ratio" << " completed successfully\n";
 #endif
 	return (2 * A * 16 + 2 * 3.76 * A * 14) / M[0];
 }
@@ -123,7 +123,7 @@ int main()
 		{
 #ifdef DEBUG
 			if (measurements[i].size() < 9 || measurements.size() <= i)
-				throw OutOfBoundsException("распределение данных из таблицы");
+				throw OutOfBoundsException("distribution of data from a table");
 #endif
 			Q.push_back(measurements[i][0]);
 			C.push_back(measurements[i][1]);
@@ -136,7 +136,7 @@ int main()
 			fuel_type.push_back(measurements[i][8]);
 		}
 #ifdef DEBUG
-		cerr << "модуль " << "распределение данных из таблицы" << " выполнен успешно\n";
+		cerr << "mudule " << "distribution of data from a table" << " completed successfully\n";
 #endif
 		//if(fuel_type[0] == 1.0f)
 		cout << "Объемная теплотворность топлива = " << fuel_volume(Q, C) << endl;

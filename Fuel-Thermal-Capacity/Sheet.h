@@ -3,7 +3,6 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include <clocale>
 
 class Sheet
 {
