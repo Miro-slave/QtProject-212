@@ -1,4 +1,5 @@
-﻿#include <vector>
+
+#include <vector>
 #include <iostream>
 #include <clocale>
 #include "Sheet.h"
@@ -6,29 +7,25 @@
 using namespace std;
 //ЧТОБЫ УБРАТЬ ДЕБАГ МОД, ЗАКОММЕНТИРУЙТЕ #define DEBUG В ФАЙЛЕ Exceptions.h
 
-
-/*Исходные данные в таблицах:
-Qнi(дж/м^3)
-Ci(по объему)
-газообразное топливо - 0
-жидкое топливо - 1
-*/
 //Т.к. перевод из СС не требудется, то функция считает как для газообразного, так и для жидкого
 float fuel_volume(vector<float> Q, vector<float> C) {
 	float fuel_volume_all = 0;
 
 	for (int i = 0; i < Q.size(); i++) {
+
 #ifdef DEBUG
 		if (C.size() <= i)
 			throw OutOfBoundsException("fuel_volume");
 #endif
 		fuel_volume_all = fuel_volume_all + Q[i] * C[i];
+
 	}
 #ifdef DEBUG
 	cerr << "mudule " << "fuel_volume" << " completed successfully\n";
 #endif
 	return fuel_volume_all;
 }
+
 
 //Функции считают значение в зависимости от того, какой вид топлива используется
 float liquid_fuel_weight(vector<float> Q, vector<float> C, vector<float> P, vector<float> fuel_type) {
@@ -54,20 +51,25 @@ float gas_fuel_weight(vector<float> Q, vector<float> C, vector<float> M, vector<
 	float fuel_weight_all = 0, M_all = 0;
 	float mi, Qi, Ci;
 
+
 	for (int i = 0; i < Q.size(); i++) {
 #ifdef DEBUG
 		if (C.size() <= i || M.size() <= i || fuel_type.size() <= 0)
 			throw OutOfBoundsException("gas_fuel_weight");
 #endif
 		if (fuel_type[i] == 0.0f) {
-			M_all = M_all + M[i] * C[i];
+			M_all += M[i] * C[i];
 		}
 	}
+
 	for (int i = 0; i < Q.size(); i++) {
+
 #ifdef DEBUG
 		if (C.size() <= i || M.size() <= i || n.size() <= i || fuel_type.size() <= 0)
 			throw OutOfBoundsException("gas_fuel_weight");
 #endif
+
+		//Если топливо газообразное
 		if (fuel_type[i] == 0.0f) {
 			mi = M[i] * n[i];
 #ifdef DEBUG
@@ -76,7 +78,14 @@ float gas_fuel_weight(vector<float> Q, vector<float> C, vector<float> M, vector<
 #endif
 			Qi = Q[i] / mi;
 			Ci = C[i] * (M[i] / M_all);
-			fuel_weight_all = fuel_weight_all + Qi * Ci;
+
+			fuel_weight_all += Qi * Ci;
+		}
+		//Если топливо жидкое
+		if (fuel_type[i] == 1.0f) {
+			Qi = Q[i] / P[i];//Перевод из дж/м^3 в Дж/кг
+			fuel_weight_all += + Qi * C[i];
+
 		}
 	}
 #ifdef DEBUG
@@ -111,6 +120,7 @@ int main()
 	{
 		setlocale(LC_ALL, "rus");
 
+
 		int k = 0;
 		float Q_volume = 0, Q_weight = 0, ratio = 0, M_all = 0;
 		Sheet ExelTable;
@@ -118,6 +128,7 @@ int main()
 		ExelTable.setPath("test.csv");
 
 		vector<vector<float>> measurements = ExelTable.readAsFloat();
+
 
 		for (int i = 0; i < measurements.size(); i++)
 		{
@@ -151,3 +162,19 @@ int main()
 
 	return 0;
 }
+/*
+Входные данные:
+Таблица с данными. Таблица состоит из строк со значениями 
+и разделенны запятыми.
+в порядке: Q(дж/м^3), C(по объему), M, m, P, K, n, L, 
+fuel_type(газообразное топливо - 0, жидкое топливо - 1)
+Пример того как должна выглядеть таблица:
+1,2,3,4,5,6,7,8,1
+1,2,3,4,5,6,7,8,1
+1,2,3,4,5,6,7,8,0
+
+Выходные данные:
+Функции fuel_volume, fuel_weight и fuel_ratio считают итоговую 
+объемную теплотворность, массовую теплотворность и стереохимическое отношение соответственно
+и выводят значение типа float.
+*/
