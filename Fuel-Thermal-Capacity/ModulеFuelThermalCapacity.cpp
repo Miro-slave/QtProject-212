@@ -1,4 +1,6 @@
 ﻿#include <vector>
+#include <iostream>
+#include <clocale>
 #include "Sheet.h"
 #include "Exceptions.h"
 using namespace std;
